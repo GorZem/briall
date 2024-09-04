@@ -1,0 +1,96 @@
+{% extends 'index.html' %}
+{% block title %}
+<title>Каталог</title>
+{% endblock %}
+{% block body %}
+    <!-- Page Title -->
+    <div class="page-title" data-aos="fade">
+      <div class="container">
+        <nav class="breadcrumbs">
+          <ol>
+            <li><a href="/">Главная</a></li>
+            <li><a href="/catalog">Каталог</a></li>
+            <li class="current">Кольцо 1</li>
+          </ol>
+        </nav>
+        <h1>Заголовок</h1>
+      </div>
+    </div><!-- End Page Title -->
+
+    <!-- Portfolio Details Section -->
+    <section id="portfolio-details" class="portfolio-details section">
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-8">
+            <div class="portfolio-details-slider swiper init-swiper">
+
+              <script type="application/json" class="swiper-config">
+                {
+                  "loop": true,
+                  "speed": 600,
+                  "autoplay": {
+                    "delay": 5000
+                  },
+                  "slidesPerView": "auto",
+                  "pagination": {
+                    "el": ".swiper-pagination",
+                    "type": "bullets",
+                    "clickable": true
+                  }
+                }
+              </script>
+
+              <div class="swiper-wrapper align-items-center">
+
+                <div class="swiper-slide">
+                  <a href="../static/catalogimg/ringroll1/ringroll.jpg" data-gallery="portfolio-gallery-book" class="glightbox preview-link">
+                    <img src="../static/catalogimg/ringroll1/ringroll.jpg" alt="">
+                  </a>
+                </div>
+
+                <div class="swiper-slide">
+                  <a href="../static/catalogimg/ringroll1/ringroll2.jpg" data-gallery="portfolio-gallery-book" class="glightbox preview-link">
+                  <img src="../static/catalogimg/ringroll1/ringroll2.jpg" alt="">
+                    </a>
+                </div>
+
+                <div class="swiper-slide">
+                  <<a href="../static/catalogimg/ringroll1/ringroll3.jpg" data-gallery="portfolio-gallery-book" class="glightbox preview-link">
+                  <img src="../static/catalogimg/ringroll1/ringroll3.jpg" alt="">
+                    </a>
+                </div>
+
+              </div>
+              <div class="swiper-pagination"></div>
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="portfolio-info" data-aos="fade-up" data-aos-delay="200">
+              <h3>Кольцо</h3>
+              <ul>
+                <li><strong>Размер</strong>: 18,7</li>
+                <li><strong>Металл</strong>: Золото 585</li>
+                <li><strong>Пример</strong>: 01 Март, 2020</li>
+                <li><strong>Project URL</strong>: <a href="#">www.example.com</a></li>
+              </ul>
+            </div>
+            <div class="portfolio-description" data-aos="fade-up" data-aos-delay="300">
+              <h2>• 1 Турмалин индиголит <br>• 2 Бриллианта «триллион» </h2>
+              <p>
+                Индиголит - это полудрагоценный камень, разновидность <a href="https://jewellerymag.ru/gems/semi-precious/tourmaline/">турмалина</a>,  который окрашен в синий, фиолетово-синий (до почти чёрного), серовато-синий или зеленовато-синий <a href="https://bigenc.ru/c/tsvet-mineralov-aa1496">цвет</a>.
+Имя камень получил благодаря своему красивому оттенку «индиго».
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section><!-- /Portfolio Details Section -->
+
+{% endblock %}
