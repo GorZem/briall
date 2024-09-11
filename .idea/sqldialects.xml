@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SqlDialectMappings">
-    <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/58042d0c-ac50-4cec-a7a7-606e6fd14fec/console.sql" dialect="MySQL" />
-    <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/8f114102-a46d-4a88-b507-271b27d7f144/console.sql" dialect="SQLite" />
-    <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/b325855d-4412-4ec9-a119-8677be25c36c/console.sql" dialect="MySQL" />
     <file url="PROJECT" dialect="SQLite" />
   </component>
 </project>

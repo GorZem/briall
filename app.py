@@ -12,13 +12,26 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///catalog.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 
+
 db = SQLAlchemy(app)
 
+
+class Product_Image(db.Model):
+    __tablename__ = 'product_image'
+    id = db.Column(db.Integer, primary_key=True)
+    url = db.Column(db.String(200), nullable=False)
+    product_id = db.Column(db.Integer, db.ForeignKey('products2.id'), nullable=False)
+
 class Products2(db.Model):
+    __tablename__ = 'products2'
     id = db.Column(db.Integer, primary_key=True)
     description = db.Column(db.Text)
     metal = db.Column(db.Text)
     type = db.Column(db.Text)
+    images = db.relationship('Product_Image', backref='product', lazy=True)
+
+
+
 
 
 
@@ -32,7 +45,7 @@ def catalog():
     with app.app_context():
         inspector = inspect(db.engine)
         print("tables=", inspector.get_table_names())
-        products = db.session.execute(text('SELECT * FROM products2')).fetchall()
+        products = Products2.query.all()
         print("products=",products)
         for product in products:
             print("prod=",product)

@@ -29,60 +29,27 @@
 
           <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
             <li data-filter="*" class="filter-active">Все</li>
-            <li data-filter=".filter-ears">Серьги</li>
-            <li data-filter=".filter-rings">Кольца</li>
+            <li data-filter=".filter-earring">Серьги</li>
+            <li data-filter=".filter-ring">Кольца</li>
+            <li data-filter=".filter-pendant">Подвески</li>
           </ul><!-- End Portfolio Filters -->
 
           <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
 
             {% for product in products %}
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-ears">
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-{{ product.type }}">
               <div class="portfolio-content h-100">
-                <img src="../catalog_files/id1/id1_1.jpg" class="img-fluid" alt="">
-                <!---<img src="../catalog_files/id{{ product.id }}/id{{ product.id }}_1" class="img-fluid" alt="">--->
+                <img src="static/catalog_files/id{{product.id}}/id{{product.id}}_1.jpg" class="img-fluid" alt="">
                 <div class="portfolio-info">
                   <p>{{ product.description }}</p>
-                  <!--<a href="../catalog_files/id{{ product.id }}/id{{ product.id }}_1" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="{{ url_for('product.detail', products_id=product.id) }}" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>-->
+                  <a href="static/catalog_files/id{{product.id}}/id{{product.id}}_1.jpg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                  <a href="{{ url_for('product_detail', product_id=product.id) }}" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
                 </div>
               </div>
             </div>
             {% endfor %}
 
-            <!-- End Portfolio Item -->
 
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-ears">
-              <div class="portfolio-content h-100">
-                <img src="static/catalogimg/ears2.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <p>Серьги из золота 585 пробы<br>2 Аквамарина Круг - 1,6ct</p>
-                  <a href="static/catalogimg/ears2.jpg" title="Product 1" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-rings">
-              <div class="portfolio-content h-100">
-                <img src="static/catalogimg/ring1.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <p>Кольцо из золота 585 пробы<br>1 Бриллиант Овал - 0,56ct (cvd)<br>2 Турмалина «Параиба»триллион - 0,16ct</p>
-                  <a href="static/catalogimg/ring1.jpg" title="Branding 1" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-rings">
-              <div class="portfolio-content h-100">
-                <img src="static/catalogimg/ring2.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <p>Кольцо из золота 585 пробы<br>Турмалин индиголит<br>2 Бриллианта «триллион»</p>
-                  <a href="static/catalogimg/ring2.jpg" data-gallery="portfolio-gallery-book" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="/catalog/00001" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-                </div>
-              </div>
-            </div><!-- End Portfolio Item -->
 
           </div><!-- End Portfolio Container -->
 
