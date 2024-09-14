@@ -27,12 +27,30 @@
 
         <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
 
-          <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
-            <li data-filter="*" class="filter-active">Все</li>
-            <li data-filter=".filter-earring">Серьги</li>
-            <li data-filter=".filter-ring">Кольца</li>
-            <li data-filter=".filter-pendant">Подвески</li>
-          </ul><!-- End Portfolio Filters -->
+          <button id="toggle-filters">Показать фильтры</button>
+
+          <div id="filters" style="display: none;">
+            <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
+              <li data-filter="*" class="filter-active">Все</li>
+              <li data-filter=".filter-earring">Серьги</li>
+              <li data-filter=".filter-ring">Кольца</li>
+              <li data-filter=".filter-pendant">Подвески</li>
+            </ul>
+          </div>
+
+          <script>
+            document.getElementById('toggle-filters').addEventListener('click', function() {
+              var filters = document.getElementById('filters');
+              if (filters.style.display === 'none') {
+                filters.style.display = 'block';
+                this.textContent = 'Скрыть фильтры';
+              } else {
+                filters.style.display = 'none';
+                this.textContent = 'Показать фильтры';
+              }
+            });
+          </script>
+
 
           <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
 
