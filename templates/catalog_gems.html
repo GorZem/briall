@@ -1,0 +1,62 @@
+{% extends 'index.html' %}
+{% block title %}
+<title>Каталог</title>
+{% endblock %}
+{% block body %}
+<!-- Page Title -->
+    <div class="page-title" data-aos="fade">
+      <div class="container">
+        <nav class="breadcrumbs">
+          <ol>
+            <li><a href="/">Главная</a></li>
+            <li class="current">Камни</li>
+          </ol>
+        </nav>
+      </div>
+    </div><!-- End Page Title -->
+<!-- Portfolio Section -->
+    <section id="portfolio" class="portfolio section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Камни</h2>
+        <p>Наши камни</p>
+      </div><!-- End Section Title -->
+
+      <div class="container">
+
+        <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
+
+          <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
+            <li data-filter="*" class="filter-active">Все</li>
+            <li data-filter=".filter-alex">Александрит</li>
+            <li data-filter=".filter-diamond">Бриллиант</li>
+            <li data-filter=".filter-emerald">Изумруд</li>
+            <li data-filter=".filter-ruby">Рубин</li>
+            <li data-filter=".filter-saph">Сапфир</li>
+            <li data-filter=".filter-pearl">Жемчуг</li>
+          </ul><!-- End Portfolio Filters -->
+
+          <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
+
+            {% for gem in gems %}
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-{{ gem.breed }}">
+              <div class="portfolio-content h-100">
+                <img src="static/gems_files/gem{{gem.id}}/gem{{gem.id}}_1.jpg" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <a href="static/gems_files/gem{{gem.id}}/gem{{gem.id}}_1.jpg" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+
+          </div><!-- End Portfolio Container -->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Portfolio Section -->
+
+{% endblock %}
+

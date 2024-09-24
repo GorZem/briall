@@ -10,10 +10,10 @@
           <ol>
             <li><a href="/">Главная</a></li>
             <li><a href="/catalog">Каталог</a></li>
-            <li class="current">Кольцо 1</li>
+            <li class="current">Изделие {{product.id}}</li>
           </ol>
         </nav>
-        <h1>Заголовок</h1>
+        <h1>Изделие {{product.id}}</h1>
       </div>
     </div><!-- End Page Title -->
 
@@ -60,17 +60,12 @@
             <div class="portfolio-info" data-aos="fade-up" data-aos-delay="200">
               <h3>Кольцо</h3>
               <ul>
-                <li><strong>Тип</strong>{{ product.type }}</li>
-                <li><strong>Металл:</strong>{{ product.metal }}</li>
-                <li><strong>Пример</strong>: 01 Март, 2020</li>
-                <li><strong>Project URL</strong>: <a href="#">www.example.com</a></li>
+                <li><strong>Тип: </strong>{{ product.type }}</li>
+                <li><strong>Металл: </strong>{{ product.metal.translated }}</li>
               </ul>
             </div>
             <div class="portfolio-description" data-aos="fade-up" data-aos-delay="300">
-              <h2>{{ product.description }}</h2>
-              <p>
-                текст
-              </p>
+              <h2>{{ product.description | replace('\n', '<br>') | safe }}</h2>
             </div>
           </div>
 
