@@ -34,6 +34,7 @@ class Products2(db.Model):
     metal = db.relationship('Metal_Breeds', backref=db.backref('product', lazy=True))
     type = db.Column(db.Text)
     images = db.relationship('Product_Image', backref='product', lazy=True)
+    main_title = db.Column(db.Text)
 
 
 class Gems_Image(db.Model):
@@ -72,18 +73,6 @@ def product_detail(product_id):
     product = Products2.query.get_or_404(product_id)
     return render_template('product_detail.html', product=product)
 
-@app.route("/about")
-def about():
-    return render_template("about.html")
-
-@app.route("/contact")
-def contact():
-    return render_template("contact.html")
-
-@app.route("/catalog/00001")
-def details():
-    return render_template("details.html")
-
 @app.route("/catalog_gems")
 def catalog_gems():
     with app.app_context():
@@ -94,6 +83,11 @@ def catalog_gems():
 
 @app.route("/catalog3")
 def catalog3():
-    return render_template("catalog3.html")
+    return render_template("inwork.html")
 
+
+
+@app.route("/dev")
+def inwork():
+    return render_template("inwork.html")
 
