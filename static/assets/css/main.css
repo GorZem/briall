@@ -913,6 +913,9 @@ section,
   max-height: 70vh
 }
 
+.subabout .content p{
+  font-size: 1.2rem;
+}
 
 }
 .subabout .content {
