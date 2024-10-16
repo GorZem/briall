@@ -38,7 +38,7 @@
   --nav-color: #ffffff;  /* The default color of the main navmenu links */
   --nav-hover-color: #D1D2D4; /* Applied to main navmenu links when they are hovered over or active */
   --nav-mobile-background-color: #ffffff; /* Used as the background color for mobile navigation menu */
-  --nav-dropdown-background-color: #d1d2d4; /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
+  --nav-dropdown-background-color: #ffffff; /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
   --nav-dropdown-color: #444444; /* Used for navigation links of the dropdown items in the navigation menu. */
   --nav-dropdown-hover-color: #387678; /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
 }
@@ -55,7 +55,7 @@
   --default-color: #ffffff;
   --heading-color: #ffffff;
   --surface-color: #252525;
-  --contrast-color: #ffffff;
+  --contrast-color: #387678;
 }
 
 /* Smooth scroll */
@@ -93,57 +93,7 @@ h6 {
   font-family: var(--heading-font);
 }
 
-/* PHP Email Form Messages
-------------------------------*/
-.php-email-form .error-message {
-  display: none;
-  background: #df1529;
-  color: #ffffff;
-  text-align: left;
-  padding: 15px;
-  margin-bottom: 24px;
-  font-weight: 600;
-}
 
-.php-email-form .sent-message {
-  display: none;
-  color: #ffffff;
-  background: #059652;
-  text-align: center;
-  padding: 15px;
-  margin-bottom: 24px;
-  font-weight: 600;
-}
-
-.php-email-form .loading {
-  display: none;
-  background: var(--surface-color);
-  text-align: center;
-  padding: 15px;
-  margin-bottom: 24px;
-}
-
-.php-email-form .loading:before {
-  content: "";
-  display: inline-block;
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  margin: 0 10px -6px 0;
-  border: 3px solid var(--accent-color);
-  border-top-color: var(--surface-color);
-  animation: php-email-form-loading 1s linear infinite;
-}
-
-@keyframes php-email-form-loading {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
 
 /*--------------------------------------------------------------
 # Global Header
@@ -389,7 +339,6 @@ h6 {
   .navmenu a i:hover,
   .navmenu a:focus i:hover {
     background-color: var(--accent-color);
-    color: var(--contrast-color);
   }
 
   .navmenu a:hover,
@@ -401,7 +350,6 @@ h6 {
   .navmenu .active i,
   .navmenu .active:focus i {
     background-color: var(--accent-color);
-    color: var(--contrast-color);
     transform: rotate(180deg);
   }
 
@@ -920,6 +868,85 @@ section,
 .about .icon-box:hover h4 a {
   color: var(--accent-color);
 }
+
+
+
+/*--------------------------------------------------------------
+# About Section
+--------------------------------------------------------------*/
+.subabout .content h3 {
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+
+
+/*
+ .subabout .container .img-1 {
+  max-width: 100%;
+  height: 70%;
+
+}
+*/
+
+@media only screen and (max-width: 600px) {
+  .subabout .container .img-1 {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .subabout .container .video-container video{
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+
+@media only screen and (min-width: 601px) {
+  .subabout .container .img-1 {
+    max-width: 100%;
+    max-height: 70vh
+  }
+
+  .subabout .container .video-container video {
+  max-width: 100%;
+  max-height: 70vh
+}
+
+
+}
+.subabout .content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.subabout .content .fst-italic {
+  color: color-mix(in srgb, var(--default-color), var(--contrast-color) 50%);
+}
+
+.subabout .content ul {
+  list-style: none;
+  padding: 0;
+}
+
+.subabout .content ul li {
+  padding: 10px 0 0 0;
+  display: flex;
+}
+
+.subabout .content ul i {
+  color: var(--accent-color);
+  margin-right: 0.5rem;
+  line-height: 1.2;
+  font-size: 1.25rem;
+}
+
+.subabout .content p:last-child {
+  margin-bottom: 0;
+}
+
+
+
 
 /*--------------------------------------------------------------
 # Stats Section
