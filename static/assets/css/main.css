@@ -586,7 +586,7 @@ section,
 --------------------------------------------------------------*/
 .section-title {
   text-align: center;
-  padding-bottom: 60px;
+  padding-bottom: 30px;
   position: relative;
 }
 
@@ -988,7 +988,7 @@ section,
   background-color: var(--surface-color);
   text-align: center;
   border: 1px solid color-mix(in srgb, var(--default-color), transparent 85%);
-  padding: 80px 20px;
+  padding: 20px 20px;
   height: 100%;
   transition: all ease-in-out 0.3s;
 }
@@ -1086,11 +1086,15 @@ section,
 --------------------------------------------------------------*/
 /* Устанавливаем высоту для каждого элемента, чтобы они выглядели одинаково */
 .alt-services .service-item {
-  height: auto; /* Убираем фиксированную высоту, чтобы элементы могли адаптироваться по контенту */
+  margin-bottom: 5px /* Убираем фиксированную высоту, чтобы элементы могли адаптироваться по контенту */
+}
+
+.alt-services{
+  padding: 10px;
 }
 
 /* Обеспечиваем, чтобы все элементы в строке были одинаковой ширины */
-@media (max-width: 767.98px) {
+@media only screen and (max-width: 600px) {
   .alt-services .col-12 {
     max-width: 33.3333%;
     flex: 0 0 33.3333%; /* 33.3333% для трех элементов в ряд */
@@ -1100,53 +1104,65 @@ section,
   font-weight: 700;
   margin: 10px 0 15px 0;
     text-align: center;
-  font-size: 10px;
+  font-size: 12px;
   transition: ease-in-out 0.3s;
 }
-
-
-}
-
-
-
-
-.alt-services .img,
-.alt-services .img-long {
-  border-radius: 8px;
-  overflow: hidden;
-  height: 50%;
-}
-.alt-services .img-long {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 50%;
-}
-
-.alt-services .img-long img {
-  max-height: 50%;
-  width: auto;
-  object-fit: cover;
-}
-
-
-.alt-services .img img,
-.alt-services .img-long img {
-  transition: 0.6s;
-}
-
-.alt-services .details {
+  .alt-services .details {
   background: color-mix(in srgb, var(--surface-color), transparent 5%);
   position: absolute;
-  left: 10px;
-  right: 10px;
+  left: 1px;
+  right: 1px;
   bottom: 10px;
-  padding: 15px;
+  /*padding: 15px;*/
   transition: all ease-in-out 0.3s;
   text-align: center;
   border-radius: 8px;
   box-shadow: 0px 0 15px rgba(0, 0, 0, 0.1);
 }
+
+}
+
+
+@media only screen and (min-width: 601px){
+  .alt-services .details {
+  background: color-mix(in srgb, var(--surface-color), transparent 5%);
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  /*padding: 15px;*/
+  transition: all ease-in-out 0.3s;
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: 0px 0 15px rgba(0, 0, 0, 0.1);
+}
+
+
+}
+
+.alt-services .row {
+  margin-right: -5px; /* Adjust as needed */
+  margin-left: -5px; /* Adjust as needed */
+}
+
+.alt-services .col-12.col-md-4 {
+  padding-right: 5px; /* Adjust as needed */
+  padding-left: 5px; /* Adjust as needed */
+}
+
+
+
+.alt-services .img{
+  border-radius: 8px;
+  overflow: hidden;
+  height: 50%;
+}
+
+
+.alt-services .img img{
+  transition: 0.6s;
+}
+
 
 .alt-services .details h3 {
   font-weight: 700;
