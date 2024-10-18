@@ -984,6 +984,57 @@ section,
 /*--------------------------------------------------------------
 # Services Section
 --------------------------------------------------------------*/
+.services-product .service-product-item {
+  background-color: var(--surface-color);
+  text-align: center;
+  border: 1px solid color-mix(in srgb, var(--default-color), transparent 85%);
+  padding: 80px 20px;
+  height: 100%;
+  transition: all ease-in-out 0.3s;
+}
+
+.services-product .service-product-item .icon {
+  background: var(--accent-color);
+  color: var(--contrast-color);
+  margin: 0 auto;
+  width: 64px;
+  height: 64px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  transition: 0.3s;
+}
+
+.services-product .service-product-item .icon i {
+  font-size: 28px;
+  transition: ease-in-out 0.3s;
+}
+
+.services-product .service-product-item h3 {
+  font-weight: 700;
+  margin: 10px 0 15px 0;
+  font-size: 22px;
+  transition: 0.3s;
+}
+
+.services-product .service-product-item p {
+  line-height: 24px;
+  font-size: 14px;
+  margin-bottom: 0;
+}
+
+.services-product .service-product-item:hover {
+  box-shadow: 0px 0 25px 0 rgba(0, 0, 0, 0.1);
+  transform: translateY(-10px);
+}
+
+
+
+
+
+
 .services .service-item {
   background-color: var(--surface-color);
   text-align: center;
@@ -1030,45 +1081,80 @@ section,
   transform: translateY(-10px);
 }
 
-
 /*--------------------------------------------------------------
 # Alt Services Section
 --------------------------------------------------------------*/
-.alt-services .img {
-  border-radius: 8px;
-  overflow: hidden;
+/* Устанавливаем высоту для каждого элемента, чтобы они выглядели одинаково */
+.alt-services .service-item {
+  height: auto; /* Убираем фиксированную высоту, чтобы элементы могли адаптироваться по контенту */
 }
 
-.alt-services .img img {
+/* Обеспечиваем, чтобы все элементы в строке были одинаковой ширины */
+@media (max-width: 767.98px) {
+  .alt-services .col-12 {
+    max-width: 33.3333%;
+    flex: 0 0 33.3333%; /* 33.3333% для трех элементов в ряд */
+  }
+
+  .alt-services .service-item .details h3 {
+  font-weight: 700;
+  margin: 10px 0 15px 0;
+    text-align: center;
+  font-size: 10px;
+  transition: ease-in-out 0.3s;
+}
+
+
+}
+
+
+
+
+.alt-services .img,
+.alt-services .img-long {
+  border-radius: 8px;
+  overflow: hidden;
+  height: 50%;
+}
+.alt-services .img-long {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50%;
+}
+
+.alt-services .img-long img {
+  max-height: 50%;
+  width: auto;
+  object-fit: cover;
+}
+
+
+.alt-services .img img,
+.alt-services .img-long img {
   transition: 0.6s;
 }
 
 .alt-services .details {
   background: color-mix(in srgb, var(--surface-color), transparent 5%);
   position: absolute;
-  left: 20px;
-  right: 20px;
-  bottom: 20px;
-  padding: 30px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  padding: 15px;
   transition: all ease-in-out 0.3s;
   text-align: center;
   border-radius: 8px;
-  box-shadow: 0px 0 25px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0 15px rgba(0, 0, 0, 0.1);
 }
 
 .alt-services .details h3 {
   font-weight: 700;
   margin: 10px 0 15px 0;
-  font-size: 22px;
+  font-size: 18px;
   transition: ease-in-out 0.3s;
 }
 
-.alt-services .details p {
-  color: color-mix(in srgb, var(--default-color), transparent 10%);
-  line-height: 24px;
-  font-size: 14px;
-  margin-bottom: 0;
-}
 
 .alt-services .service-item:hover .details h3 {
   color: var(--accent-color);
@@ -1077,6 +1163,40 @@ section,
 .alt-services .service-item:hover .img img {
   transform: scale(1.2);
 }
+
+.alt-services .service-item:hover .img-long img {
+  transform: scale(1.2);
+}
+
+.alt-services .service-item{
+  height: 50;
+}
+.full-height {
+  height: calc(100% + 15px);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*--------------------------------------------------------------
 # Features Section
