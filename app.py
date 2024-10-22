@@ -5,10 +5,13 @@ from sqlalchemy import inspect
 
 
 app = Flask(__name__)
-
+app.config['SECRET_KEY'] = b'\xaa\x8cf\x9aTqo\x86\x0e\x85\x81\xcc\xdc\xb4F7\x0cV0E`+'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///catalog.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
+app.config['SESSION_COOKIE_HTTPONLY'] = True
+app.config['SESSION_COOKIE_SECURE'] = True
+
 
 db = SQLAlchemy(app)
 
@@ -90,4 +93,8 @@ def catalog3():
 @app.route("/dev")
 def inwork():
     return render_template("inwork.html")
+
+@app.route("/equipment")
+def about():
+    return render_template("equipment_detail.html")
 
