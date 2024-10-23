@@ -197,11 +197,13 @@ h6 {
     font-weight: 400;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     white-space: nowrap;
     transition: 0.3s;
   }
 
+  .navmenu .dropdown-icon {
+  justify-content: space-between;
+}
   .navmenu a i,
   .navmenu a:focus i {
     font-size: 12px;
@@ -212,6 +214,14 @@ h6 {
 
   .navmenu li:last-child a {
     padding-right: 0;
+  }
+
+
+  .navmenu li a i {
+  color: var(--accent-color);
+  margin-right: 0.5rem;
+  line-height: 1;
+  font-size: 1rem;
   }
 
   .navmenu li:hover>a,
@@ -316,16 +326,18 @@ h6 {
     font-weight: 500;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     white-space: nowrap;
     transition: 0.3s;
   }
 
-  .navmenu a i,
-  .navmenu a:focus i {
+.dropdown-icon {
+  justify-content: space-between;
+}
+
+  .navmenu a .bi_drop,
+  .navmenu a:focus .bi_drop {
     font-size: 12px;
     line-height: 0;
-    margin-left: 5px;
     width: 30px;
     height: 30px;
     display: flex;
@@ -333,11 +345,12 @@ h6 {
     justify-content: center;
     border-radius: 50%;
     transition: 0.3s;
+    margin-left: auto;
     background-color: color-mix(in srgb, var(--accent-color), transparent 90%);
   }
 
-  .navmenu a i:hover,
-  .navmenu a:focus i:hover {
+  .navmenu a .bi_drop:hover,
+  .navmenu a:focus .bi_drop:hover {
     background-color: var(--accent-color);
   }
 
@@ -347,8 +360,8 @@ h6 {
     color: var(--nav-dropdown-hover-color);
   }
 
-  .navmenu .active i,
-  .navmenu .active:focus i {
+  .navmenu .active .bi_drop,
+  .navmenu .active:focus .bi_drop {
     background-color: var(--accent-color);
     transform: rotate(180deg);
   }
@@ -930,18 +943,24 @@ section,
 .subabout .content ul {
   list-style: none;
   padding: 0;
+  font-size: 1.2rem;
 }
 
 .subabout .content ul li {
-  padding: 10px 0 0 0;
+  padding: 0;
   display: flex;
+  padding-top: -5px;
 }
+.subabout .content ul li span{
+  font-weight: 700;
+}
+
 
 .subabout .content ul i {
   color: var(--accent-color);
   margin-right: 0.5rem;
   line-height: 1.2;
-  font-size: 1.25rem;
+  font-size: 1.6rem;
 }
 
 .subabout .content p:last-child {
@@ -1138,6 +1157,11 @@ section,
 }
 
 
+}
+
+.alt-services .container {
+  padding-right: 0px; /* Adjust as needed */
+  padding-left: 0px;
 }
 
 .alt-services .row {
