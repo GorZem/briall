@@ -1,34 +1,58 @@
+from sqlalchemy import Column, Integer, String, Text, Boolean, ForeignKey
+from sqlalchemy.orm import relationship
 from flask_sqlalchemy import SQLAlchemy
-from app import app
 
-db = SQLAlchemy(app)
+db = SQLAlchemy()
 
+class Jewelry(db.Model):
+    __tablename__ = 'jewelry'
 
-class Product_Image(db.Model):
-    __tablename__ = 'product_image'
-    id = db.Column(db.Integer, primary_key=True)
-    url = db.Column(db.String(200), nullable=False)
-    product_id = db.Column(db.Integer, db.ForeignKey('products2.id'), nullable=False)
+    id = Column(Integer, primary_key=True, index=True)
+    type = Column(String, index=True)
+    metal_id = Column(Integer, ForeignKey('metals.id'))
+    description = Column(Text)
+    main_image_id = Column(Integer, ForeignKey('images.id', ondelete='SET NULL'))  # Изменил связь, чтобы избежать ошибки при удалении
+    main_title = Column(String)
+    metal = relationship("Metal", backref="jewelry")  # Добавляем отношение к Metal
+    images = relationship("Image", back_populates="jewelry", foreign_keys="[Image.jewelry_id]")  # Уточнение связи с использованием foreign_keys
+    stones = relationship("JewelryStone", back_populates="jewelry")
 
-class Products2(db.Model):
-    __tablename__ = 'products2'
-    id = db.Column(db.Integer, primary_key=True)
-    description = db.Column(db.Text)
-    metal = db.Column(db.Text)
-    type = db.Column(db.Text)
-    images = db.relationship('Product_Image', backref='product', lazy=True)
+    @property
+    def main_image(self):
+        return next((img for img in self.images if img.is_main), None)
 
+class Metal(db.Model):
+    __tablename__ = 'metals'
 
-class Gems_Image(db.Model):
-    __tablename__ = 'gems_image'
-    id = db.Column(db.Integer, primary_key=True)
-    url = db.Column(db.String(200), nullable=False)
-    gem_id = db.Column(db.Integer, db.ForeignKey('gems.id'), nullable=False)
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String, unique=True)
+    fineness = Column(String)
 
+class Stone(db.Model):
+    __tablename__ = 'stones'
 
-class Gems(db.Model):
-    __tablename__ = 'gems'
-    id = db.Column(db.Integer, primary_key=True)
-    breed = db.Column(db.Text)
-    category = db.Column(db.Text)
-    images = db.relationship('Gems_Image', backref='gem', lazy=True)
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String)
+    type = Column(String)
+    jewelry = relationship("JewelryStone", back_populates="stone")
+
+class JewelryStone(db.Model):
+    __tablename__ = 'jewelry_stones'
+
+    jewelry_id = Column(Integer, ForeignKey('jewelry.id'), primary_key=True)
+    stone_id = Column(Integer, ForeignKey('stones.id'), primary_key=True)
+    jewelry = relationship("Jewelry", back_populates="stones")
+    stone = relationship("Stone", back_populates="jewelry")
+
+class Image(db.Model):
+    __tablename__ = 'images'
+
+    id = Column(Integer, primary_key=True, index=True)
+    jewelry_id = Column(Integer, ForeignKey('jewelry.id'))
+    url = Column(String)
+    is_main = Column(Boolean, default=False)
+    jewelry = relationship("Jewelry", back_populates="images", foreign_keys=[jewelry_id])  # Уточнение связи с использованием foreign_keys
+
+# Создание базы данных
+def init_db():
+    db.create_all()

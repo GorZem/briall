@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <object type="image/svg+xml" data="static/icons/svg/custom-icons.svg" style="display: none;"></object>
+    <object type="image/svg+xml" data="{{ url_for('static', filename='icons/svg/custom-icons.svg') }}" style="display: none;"></object>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Briall Concept</title>
@@ -29,8 +29,13 @@
     <link href="../static/node_modules/glightbox/dist/css/glightbox.min.css" rel="stylesheet">
     <link href="../static/node_modules/swiper/swiper-bundle.min.css" rel="stylesheet">
 
+
+
+
     <!-- Main CSS File -->
     <link href="../static/assets/css/main.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="../static/assets/css/briall-icons-ie7.css">
 
 </head>
 
@@ -52,9 +57,10 @@
 
                 <li class="dropdown">
                     <a href="/#products">
-                        <svg class="bi custom-icon" xmlns="http://www.w3.org/2000/svg">
-                            <use xlink:href="#ring2">
-                        </svg>
+                        <i class="bi briall-icon-ring2">&#xe800;</i>
+<!--                        <svg class="bi custom-icon" xmlns="http://www.w3.org/2000/svg">-->
+<!--                            <use xlink:href="#ring2">-->
+<!--                        </svg>-->
                         <span>Изделия</span>
                         <i class="bi bi-chevron-down toggle-dropdown bi-drop"></i>
                     </a>
@@ -67,20 +73,14 @@
                         class="bi bi-chevron-down toggle-dropdown bi-drop"></i></a>
                     <ul>
                         <li><a href="/dev">
-                            <svg class="bi custom-icon" xmlns="http://www.w3.org/2000/svg">
-                                <use xlink:href="#diamond-high">
-                            </svg>
+                            <i class="bi bi-gem"></i>
                             <span>Драгоценные</span>
                         </a></li>
                         <li><a href="/dev">
-                            <svg class="bi custom-icon" xmlns="http://www.w3.org/2000/svg">
-                                <use xlink:href="#diamond-med">
-                            </svg>
+                            <i class="bi bi-gem"></i>
                             <span>Полудрагоценные</span></a></li>
                         <li><a href="/dev">
-                            <svg class="bi custom-icon" xmlns="http://www.w3.org/2000/svg">
-                                <use xlink:href="#diamond-low">
-                            </svg>
+                            <i class="bi bi-gem"></i>
                             <span>Поделочные</span></a></li>
                     </ul>
                 </li>

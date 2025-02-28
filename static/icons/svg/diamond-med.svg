@@ -1,10 +1,7 @@
-<?xml version="1.0" ?>
-<svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-    <path d="M4 14L8 21L16 21L20 14L17.5 7.5L12 3L6.5 7.5L4 14Z" stroke="black" stroke-linecap="round"
-          stroke-linejoin="round"/>
-    <path d="M12 3V9" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M16 21L13 15M17.5 7.5L14 10" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M6.5 7.5L10 10M11 15L8 21" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M4 14L10 13M20 14L14 13" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-    <rect height="6" rx="2" stroke="black" stroke-linecap="round" stroke-linejoin="round" width="4" x="10" y="9"/>
+<svg fill="currentColor" style="display: none;" xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink" id="diamond-med" viewBox="0 0 24 24">
+        <g>
+            <path d="M4 14L8 21L16 21L20 14L17.5 7.5L12 3L6.5 7.5L4 14Z M12 3V9 M16 21L13 15M17.5 7.5L14 10M6.5 7.5L10 10M11 15L8 21 M4 14L10 13M20 14L14 13 M10 9H14V15H10V9Z"
+                  stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </g>
 </svg>

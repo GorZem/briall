@@ -16,6 +16,17 @@
 }
 
 
+@font-face {
+      font-family: 'briall-icons';
+      src: url('../../fonts/briall-icons.eot?43814839');
+      src: url('../../fonts/briall-icons.eot?43814839#iefix') format('embedded-opentype'),
+           url('../../fonts/briall-icons.woff?43814839') format('woff'),
+           url('../../fonts/briall-icons.ttf?43814839') format('truetype'),
+           url('../../fonts/briall-icons.svg?43814839#briall-icons') format('svg');
+      font-weight: normal;
+      font-style: normal;
+    }
+
 
 :root {
   --default-font: "DINPro";  /*system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";?*/
@@ -900,7 +911,7 @@ section,
   color: var(--accent-color);
   margin-bottom: 10px;
 }
-
+3                  
 .about .icon-box h4 {
   font-size: 20px;
   font-weight: 700;
@@ -1927,6 +1938,7 @@ section,
   font-size: 26px;
   font-weight: 700;
   margin-bottom: 20px;
+  background-color: var(--surface-color);
 }
 
 .portfolio-details .portfolio-description p {
