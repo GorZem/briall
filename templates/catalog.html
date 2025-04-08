@@ -1,35 +1,91 @@
-{% extends 'index.html' %}
+{% extends 'index_withoutfooter.html' %}
 {% block title %}
 <title>Каталог</title>
 {% endblock %}
 {% block body %}
 
-<!-- Portfolio Section -->
 <section id="portfolio" class="portfolio section">
-
   <!-- Section Title -->
-  <div class="container section-title" data-aos="fade-up">
+  <div class="container section-title mt-5" data-aos="fade-up">
     <h2>Каталог</h2>
     <p>Наши ювелирные изделия</p>
   </div><!-- End Section Title -->
 
   <div class="container">
-
     <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
-
-      <div id="filters">
-        <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
-          <li data-filter="*" class="filter-active">Все</li>
-          <li data-filter=".filter-earring">Серьги</li>
-          <li data-filter=".filter-ring">Кольца</li>
-          <li data-filter=".filter-pendant">Подвески</li>
-        </ul>
+      <!-- Filter and Search -->
+      <div class="d-flex mb-4 align-items-center">
+        <button type="button" class="btn btn-outline-primary me-3" data-bs-toggle="modal" data-bs-target="#searchModal">
+          <i class="bi bi-funnel-fill"></i> Фильтры
+        </button>
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Поиск украшений" aria-label="Поиск украшений"
+                 aria-describedby="button-search">
+          <button class="btn btn-outline-primary" type="button" id="button-search"><i class="bi bi-search"></i></button>
+        </div>
       </div>
 
-      <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
+      <!-- Filter Modal -->
+      <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="searchModalLabel">Фильтры поиска</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+            </div>
+            <div class="modal-body">
+              <!-- Тип -->
+              <div class="mb-3">
+                <label class="form-label">Тип</label>
+                <div>
+                  <input type="radio" id="ring" name="type" value="ring">
+                  <label for="ring">Кольцо</label><br>
+                  <input type="radio" id="earring" name="type" value="earring">
+                  <label for="earring">Серьги</label><br>
+                  <input type="radio" id="pendant" name="type" value="pendant">
+                  <label for="pendant">Подвеска</label><br>
+                </div>
+              </div>
 
+              <!-- Металл -->
+              <div class="mb-3">
+                <label class="form-label">Металл</label>
+                <div>
+                  {% for metal in metals %}
+                  <input type="radio" id="metal_{{ metal.id }}" name="metal" value="{{ metal.title }}">
+                  <label for="metal_{{ metal.id }}">{{ metal.title }}</label><br>
+                  {% endfor %}
+                </div>
+              </div>
+
+              <!-- Камень -->
+              <div class="mb-3">
+                <label class="form-label">Камень</label>
+                <input type="text" class="form-control mb-2" id="stoneSearch" placeholder="Поиск по камням...">
+                <div id="stoneListContainer" style="max-height: 200px; overflow-y: auto; border: 1px solid #ddd; padding: 10px;">
+                  {% for stone in stones %}
+                  <div>
+                    <input type="checkbox" id="stone_{{ stone.id }}" name="stone" value="{{ stone.name }}">
+                    <label for="stone_{{ stone.id }}">{{ stone.name }}</label><br>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+              <button type="button" class="btn btn-warning" id="resetFilters">Сбросить фильтры</button>
+              <!-- Кнопка сброса -->
+              <button type="button" class="btn btn-primary" id="applyFilters">Применить</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Portfolio Items -->
+      <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
         {% for product in products %}
-        <div class="col-lg-4 col-6 portfolio-item isotope-item filter-{{ product.type }}">
+        <div class="col-12 col-md-6 col-lg-4 portfolio-item isotope-item filter-{{ product.type }}">
           <div class="portfolio-content h-100">
             {% if product.main_image %}
             <img src="{{ url_for('static', filename='catalog_files/' + product.main_image.url) }}" class="img-fluid" alt="">
@@ -38,19 +94,117 @@
             {% endif %}
             <div class="portfolio-info">
               <p>{{ product.description|replace('\n', '<br>')|safe }}</p>
-              <a href="{{ url_for('static', filename='catalog_files/' + product.main_image.url) }}" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-              <a href="{{ url_for('product_detail', product_id=product.id) }}" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              <a href="{{ url_for('static', filename='catalog_files/' + product.main_image.url) }}"
+                 data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+              <a href="{{ url_for('product_detail', product_id=product.id) }}" title="More Details"
+                 class="details-link"><i class="bi bi-link-45deg"></i></a>
             </div>
           </div>
         </div>
         {% endfor %}
-
-      </div><!-- End Portfolio Container -->
-
+      </div>
     </div>
-
   </div>
+</section>
 
-</section><!-- /Portfolio Section -->
+<script>
+let lastSelectedRadio = null; // Хранит ссылку на последний выбранный радиобаттон
+
+document.querySelectorAll('input[type="radio"]').forEach(radio => {
+  radio.addEventListener('click', function () {
+    if (lastSelectedRadio === this) {
+      // Если нажали на уже выбранный радиобаттон, снимаем выбор
+      this.checked = false;
+      lastSelectedRadio = null; // Сбрасываем состояние
+    } else {
+      // Устанавливаем выбор и запоминаем текущий радиобаттон
+      lastSelectedRadio = this;
+    }
+  });
+});
+
+
+document.getElementById('resetFilters').addEventListener('click', function () {
+  // Сбрасываем все радиокнопки
+  const radios = document.querySelectorAll('input[type="radio"]');
+  radios.forEach(radio => radio.checked = false);
+
+  // Сбрасываем все чекбоксы
+  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  checkboxes.forEach(checkbox => checkbox.checked = false);
+
+  // Сбрасываем поле поиска камней
+  const stoneSearch = document.getElementById('stoneSearch');
+  if (stoneSearch) {
+    stoneSearch.value = '';
+  }
+
+  // Можно дополнительно убрать выделенные классы или состояния, если требуется
+  console.log('Все фильтры успешно сброшены.');
+});
+
+  document.addEventListener("DOMContentLoaded", function () {
+  const isoContainer = document.querySelector('.isotope-container');
+  let iso; // Переменная для хранения экземпляра Isotope
+
+  // Инициализация Isotope после полной загрузки изображений
+  imagesLoaded(isoContainer, function () {
+    iso = new Isotope(isoContainer, {
+      itemSelector: '.portfolio-item',
+      layoutMode: 'masonry',
+      percentPosition: true, // Для адаптивности
+      masonry: {
+        columnWidth: '.portfolio-item',
+      },
+    });
+
+    document.getElementById('applyFilters').addEventListener('click', function () {
+      fetch('/filter_products', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          type: document.querySelector('input[name="type"]:checked')?.value || null,
+          metal: document.querySelector('input[name="metal"]:checked')?.value || null,
+          stones: Array.from(document.querySelectorAll('input[name="stone"]:checked')).map(cb => cb.value),
+        }),
+      })
+      .then(response => response.json())
+      .then(data => {
+        // Очищаем контейнер перед добавлением новых элементов
+        isoContainer.innerHTML = '';
+
+        // Вставляем отфильтрованные элементы
+        data.forEach(product => {
+          const productHTML = `
+            <div class="col-12 col-md-6 col-lg-4 portfolio-item isotope-item filter-${product.type}">
+              <div class="portfolio-content h-100">
+                <img src="/static/catalog_files/${product.image || 'default.jpg'}" class="img-fluid" alt="">
+                <div class="portfolio-info">
+                  <p>${product.description.replace(/\n/g, '<br>')}</p>
+                  <a href="/static/catalog_files/${product.image || 'default.jpg'}" class="glightbox preview-link">
+                    <i class="bi bi-zoom-in"></i>
+                  </a>
+                </div>
+              </div>
+            </div>`;
+          isoContainer.insertAdjacentHTML('beforeend', productHTML);
+        });
+
+        // Пересчёт макета и высоты после добавления новых элементов
+        imagesLoaded(isoContainer, function () {
+          iso.reloadItems(); // Обновляем элементы
+          iso.layout(); // Пересчитываем макет
+        });
+      });
+    });
+  });
+});
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/imagesloaded/4.1.4/imagesloaded.pkgd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/isotope/3.0.6/isotope.pkgd.min.js"></script>
 
 {% endblock %}

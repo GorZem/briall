@@ -1,4 +1,4 @@
-from flask import Flask, render_template, g, send_from_directory
+from flask import Flask, render_template, g, send_from_directory, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from sqlalchemy import inspect
@@ -56,9 +56,47 @@ def format_description(description):
 @app.route('/catalog')
 def catalog():
     products = g.db.query(Jewelry).all()
+    metals = g.db.query(Metal).all()  # Получаем список металлов из базы данных
+    stones = g.db.query(Stone).all()  # Получаем список камней из базы данных
     for product in products:
         product.description = format_description(product.description)
-    return render_template('catalog.html', products=products)
+    return render_template('catalog.html', products=products, metals=metals, stones=stones)
+
+
+
+
+
+@app.route('/filter_products', methods=['POST'])
+def filter_products():
+    filters = request.json  # Получаем данные фильтра с клиента
+    query = g.db.query(Jewelry)
+
+    # Применение фильтра по типу
+    if filters.get('type'):
+        query = query.filter(Jewelry.type == filters['type'])
+
+    # Применение фильтра по металлу
+    if filters.get('metal'):
+        query = query.join(Metal).filter(Metal.title == filters['metal'])
+
+    # Применение фильтра по камням
+    if filters.get('stones'):
+        query = query.join(Jewelry.stones).join(Stone).filter(Stone.name.in_(filters['stones']))
+
+    products = query.all()
+
+    # Формируем ответ с данными продуктов
+    result = []
+    for product in products:
+        result.append({
+            'id': product.id,
+            'description': product.description,
+            'image': product.main_image.url if product.main_image else 'catalog_files/default.jpg',
+            'type': product.type,
+        })
+
+    return jsonify(result)
+
 
 @app.route('/catalog/<int:product_id>')
 def product_detail(product_id):
@@ -76,6 +114,10 @@ def catalog_gems():
 @app.route("/catalog3")
 def catalog3():
     return render_template("inwork.html")
+
+@app.route("/news")
+def news():
+    return render_template("news.html")
 
 @app.route("/dev")
 def inwork():

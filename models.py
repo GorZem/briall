@@ -26,7 +26,7 @@ class Metal(db.Model):
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, unique=True)
-    fineness = Column(String)
+    title = Column(String)
 
 class Stone(db.Model):
     __tablename__ = 'stones'
