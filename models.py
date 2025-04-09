@@ -11,10 +11,10 @@ class Jewelry(db.Model):
     type = Column(String, index=True)
     metal_id = Column(Integer, ForeignKey('metals.id'))
     description = Column(Text)
-    main_image_id = Column(Integer, ForeignKey('images.id', ondelete='SET NULL'))  # Изменил связь, чтобы избежать ошибки при удалении
+    main_image_id = Column(Integer, ForeignKey('images.id', ondelete='SET NULL'))
     main_title = Column(String)
     metal = relationship("Metal", backref="jewelry")  # Добавляем отношение к Metal
-    images = relationship("Image", back_populates="jewelry", foreign_keys="[Image.jewelry_id]")  # Уточнение связи с использованием foreign_keys
+    images = relationship("Image", back_populates="jewelry", foreign_keys="[Image.jewelry_id]")
     stones = relationship("JewelryStone", back_populates="jewelry")
 
     @property
@@ -44,6 +44,7 @@ class JewelryStone(db.Model):
     jewelry = relationship("Jewelry", back_populates="stones")
     stone = relationship("Stone", back_populates="jewelry")
 
+
 class Image(db.Model):
     __tablename__ = 'images'
 
@@ -51,7 +52,7 @@ class Image(db.Model):
     jewelry_id = Column(Integer, ForeignKey('jewelry.id'))
     url = Column(String)
     is_main = Column(Boolean, default=False)
-    jewelry = relationship("Jewelry", back_populates="images", foreign_keys=[jewelry_id])  # Уточнение связи с использованием foreign_keys
+    jewelry = relationship("Jewelry", back_populates="images", foreign_keys=[jewelry_id])
 
 # Создание базы данных
 def init_db():

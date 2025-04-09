@@ -1,3 +1,104 @@
 python -m venv venv
 venv\Scripts\activate
 pip install -r requirements.txt
+
+
+
+from flask import Flask, render_template, g, request, jsonify
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
+from jinja2 import contextfilter, Markup
+from models import db, Jewelry, Metal, Stone, JewelryStone, Image, init_db
+
+app = Flask(__name__)
+app.config['SECRET_KEY'] = b'\xaa\x8cf\x9aTqo\x86\x0e\x85\x81\xcc\xdc\xb4F7\x0cV0E`+'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:708256@localhost:7845/briall'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_ECHO'] = True
+app.config['SESSION_COOKIE_HTTPONLY'] = True
+app.config['SESSION_COOKIE_SECURE'] = True
+
+db.init_app(app)
+migrate = Migrate(app, db)
+
+# Определение пользовательского фильтра для замены \n на <br>
+@app.template_filter()
+@contextfilter
+def nl2br(ctx, value):
+    result = value.replace('\n', '<br>\n')
+    return Markup(result)
+
+app.jinja_env.filters['nl2br'] = nl2br
+
+# Обработчик ошибок
+@app.errorhandler(404)
+def not_found_error(error):
+    return render_template('404.html'), 404
+
+@app.errorhandler(500)
+def internal_error(error):
+    db.session.rollback()
+    return render_template('500.html'), 500
+
+# Контексты приложения и сессий
+@app.before_request
+def before_request():
+    g.db = db.session
+
+@app.teardown_request
+def teardown_request(exception=None):
+    if hasattr(g, 'db'):
+        g.db.remove()
+
+# Конечная точка для каталога
+@app.route('/catalog')
+def catalog():
+    return render_template('catalog.html')
+
+# Конечная точка API для получения данных о фильтрах
+@app.route('/api/filters')
+def get_filters():
+    metals = g.db.query(Metal).all()
+    stones = g.db.query(Stone).all()
+
+    return jsonify({
+        'metals': [{'id': metal.id, 'name': metal.name} for metal in metals],
+        'stones': [{'id': stone.id, 'name': stone.name} for stone in stones],
+        'types': [{'value': 'ring', 'label': 'Кольца'}, {'value': 'earring', 'label': 'Серьги'}, {'value': 'pendant', 'label': 'Подвески'}],
+    })
+
+# Конечная точка API для получения данных о продуктах
+@app.route('/api/products')
+def get_products():
+    page = request.args.get('page', 1, type=int)
+    per_page = request.args.get('per_page', 10, type=int)
+    filter_type = request.args.get('type', '', type=str)
+    filter_metal = request.args.getlist('metal', type=int)
+    filter_stone = request.args.getlist('stone', type=int)
+
+    query = g.db.query(Jewelry)
+
+    if filter_type:
+        query = query.filter(Jewelry.type == filter_type)
+    if filter_metal:
+        query = query.filter(Jewelry.metal_id.in_(filter_metal))
+    if filter_stone:
+        query = query.join(Jewelry.stones).filter(JewelryStone.stone_id.in_(filter_stone))
+
+    pagination = query.paginate(page, per_page, False)
+    products = pagination.items
+
+    return jsonify({
+        'products': [{
+            'id': product.id,
+            'type': product.type,
+            'description': product.description.replace('\n', '<br>'),
+            'main_image_url': url_for('static', filename='catalog_files/' + product.main_image.url) if product.main_image else url_for('static', filename='catalog_files/default.jpg'),
+        } for product in products],
+        'has_next': pagination.has_next,
+    })
+
+if __name__ == '__main__':
+    with app.app_context():
+        init_db()  # Инициализация базы данных
+    app.run(debug=True)

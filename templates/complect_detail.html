@@ -1,0 +1,66 @@
+{% extends 'index.html' %}
+{% block title %}
+<title>Каталог</title>
+{% endblock %}
+{% block body %}
+
+    <section id="portfolio-details" class="portfolio-details section">
+      <div class="container section-title" data-aos="fade-up">
+
+      </div><!-- End Section Title -->
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-8">
+            <div class="portfolio-details-slider swiper init-swiper">
+
+              <script type="application/json" class="swiper-config">
+                {
+                  "loop": true,
+                  "speed": 600,
+                  "autoplay": {
+                    "delay": 5000
+                  },
+                  "slidesPerView": "auto",
+                  "pagination": {
+                    "el": ".swiper-pagination",
+                    "type": "bullets",
+                    "clickable": true
+                  }
+                }
+              </script>
+
+              <div class="swiper-wrapper align-items-center">
+              {% for image in product.images %}
+                <div class="swiper-slide">
+                  <a href="{{ url_for('static', filename='catalog_files/' + image.url) }}" data-gallery="portfolio-gallery-book" class="glightbox preview-link">
+                    <img src="{{ url_for('static', filename='catalog_files/' + image.url) }}" alt="">
+                  </a>
+                </div>
+              {% endfor %}
+              </div>
+              <div class="swiper-pagination"></div>
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="portfolio-info" data-aos="fade-up" data-aos-delay="200">
+              <h3>{{ product.main_title }}</h3>
+              <ul>
+                <li><strong>Тип: </strong>{{ product.type }}</li>
+                <li><strong>Металл: </strong>{{ product.metal.translated }}</li>
+              </ul>
+            </div>
+            <div class="portfolio-description" data-aos="fade-up" data-aos-delay="300">
+              <h2>{{ product.description | replace('\n', '<br>') | safe }}</h2>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section><!-- /Portfolio Details Section -->
+
+{% endblock %}

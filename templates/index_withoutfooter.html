@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <object type="image/svg+xml" data="{{ url_for('static', filename='icons/svg/custom-icons.svg') }}" style="display: none;"></object>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Briall Concept</title>
+    <meta name="description"
+          content="Эксклюзивные ювелирные украшения с уникальным дизайном. Безупречное качество и персонализированные услуги. Украшения, подчеркивающие вашу индивидуальность."/>
+    <meta name="keywords"
+          content="ювелирные украшения, уникальный дизайн, высокое качество, эксклюзивные украшения, персонализированные услуги, роскошные украшения, украшения на заказ, кольца, браслеты, ожерелья"/>
+
+
+    <!-- Favicons -->
+    <link href="../static/assets/img/favicon.ico" rel="icon">
+    <link href="../static/assets/img/favicon.ico" rel="apple-touch-icon">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+          rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="../static/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/node_modules/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="../static/node_modules/aos/dist/aos.css" rel="stylesheet">
+    <link href="../static/node_modules/glightbox/dist/css/glightbox.min.css" rel="stylesheet">
+    <link href="../static/node_modules/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+
+
+
+    <!-- Main CSS File -->
+    <link href="../static/assets/css/main.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="../static/assets/css/briall-icons-ie7.css">
+
+</head>
+
+<body class="starter-page-page">
+
+<header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center">
+
+        <a href="/" class="logo d-flex align-items-center me-auto">
+            <!-- Uncomment the line below if you also wish to use an image logo -->
+            <img src="/static/icons/briall-logo1.svg" alt="" width="90" height="50">
+            <!-- <h1 class="sitename">Briall Concept</h1> -->
+        </a>
+
+        <nav id="navmenu" class="navmenu">
+            <ul>
+                <li><a href="/#hero"><i class="bi bi-house"></i><span>Главная</span><br></a></li>
+                <li><a href="/#about"><i class="bi bi-person-raised-hand"></i>О нас</a></li>
+
+                <li class="dropdown">
+                    <a href="/#products">
+                        <i class="bi briall-icon-ring2">&#xe800;</i>
+<!--                        <svg class="bi custom-icon" xmlns="http://www.w3.org/2000/svg">-->
+<!--                            <use xlink:href="#ring2">-->
+<!--                        </svg>-->
+                        <span>Изделия</span>
+                        <i class="bi bi-chevron-down toggle-dropdown bi-drop"></i>
+                    </a>
+                    <ul>
+                        <li><a href="/catalog"><i class="bi bi-book"></i>Каталог</a></li>
+                        <li><a href="/dev"><i class="bi bi-images"></i>Портфолио</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown"><a href="/#alt-services"><i class="bi bi-gem"></i><span>Камни</span> <i
+                        class="bi bi-chevron-down toggle-dropdown bi-drop"></i></a>
+                    <ul>
+                        <li><a href="/dev">
+                            <i class="bi bi-gem"></i>
+                            <span>Драгоценные</span>
+                        </a></li>
+                        <li><a href="/dev">
+                            <i class="bi bi-gem"></i>
+                            <span>Полудрагоценные</span></a></li>
+                        <li><a href="/dev">
+                            <i class="bi bi-gem"></i>
+                            <span>Поделочные</span></a></li>
+                    </ul>
+                </li>
+                <li><a href="/equipment"><i class="bi bi-handbag"></i>Оборудование</a></li>
+                <li><a href="/news"><i class="bi bi-newspaper"></i>Новости</a></li>
+                <li><a href="/dev"><i class="bi bi-people"></i>Услуги</a></li>
+                <li><a href="/#contact"><i class="bi bi-telephone"></i>Контакты</a></li>
+            </ul>
+            <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+
+
+    </div>
+</header>
+
+<main class="main">
+    {% block body %} {% endblock %}
+</main>
+
+
+
+<!-- Scroll Top -->
+<a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
+
+<!-- Preloader -->
+<div id="preloader"></div>
+
+
+<!-- Vendor JS Files -->
+<script src="../static/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../static/node_modules/aos/dist/aos.js"></script>
+<script src="../static/node_modules/glightbox/dist/js/glightbox.min.js"></script>
+<script src="../static/node_modules/@srexi/purecounterjs/dist/purecounter_vanilla.js"></script>
+<script src="../static/node_modules/swiper/swiper-bundle.min.js"></script>
+<script src="../static/node_modules/imagesloaded/imagesloaded.pkgd.min.js"></script>
+<script src="../static/node_modules/isotope-layout/dist/isotope.pkgd.min.js"></script>
+
+
+<!-- Main JS File -->
+<script src="../static/assets/js/main.js"></script>
+<script>
+    fetch('static/icons/svg/custom-icons.svg')
+        .then(response => response.text())
+        .then(data => {
+            const div = document.createElement('div');
+            div.style.display = 'none';
+            div.innerHTML = data;
+            document.body.appendChild(div);
+        });
+</script>
+
+</body>
+
+</html>

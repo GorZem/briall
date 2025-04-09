@@ -6,7 +6,7 @@ from models import db, Jewelry, Metal, Stone, JewelryStone, Image, init_db
 
 app = Flask(__name__, static_url_path='/static')
 app.config['SECRET_KEY'] = b'\xaa\x8cf\x9aTqo\x86\x0e\x85\x81\xcc\xdc\xb4F7\x0cV0E`+'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:708256@localhost:7845/briall'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:708256@95.165.106.223:7845/briall'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 app.config['SESSION_COOKIE_HTTPONLY'] = True
